@@ -1,45 +1,41 @@
 public class Leetcode844 {
-    public boolean backspaceCompare(String s, String t) 
-    {
-        Stack<String> st = new Stack<String>();
-        Stack<String>st1 = new Stack<String>();
-        for(int i=0;i<s.length();i++)
-        {
-            if(s.charAt(i)!='#')
-            {
-                st.push(s.charAt(i)+"");
-            }else if(s.charAt(i)=='#')
-            {
-                if(st.empty()==true)
-                {
-                    continue;
-                }else{
-                st.pop();
-                }
-            }
-        }
+    public boolean backspaceCompare(String s, String t) {
+        int n = s.length();
+        int n1 = t.length();
         
-          for(int i=0;i<t.length();i++)
-        {
-            if(t.charAt(i)!='#')
-            {
-                st1.push(t.charAt(i)+"");
-            }else if(t.charAt(i)=='#')
-            {
-                if(st1.empty()==true)
-                {
-                    continue;
-                }else{
-                st1.pop();
-                }
+        
+        StringBuilder sb = new StringBuilder();
+        StringBuilder sb1 = new StringBuilder();
+
+        int j = -1;
+        for(int i=0;i<n;i++){
+            if(s.charAt(i) == '#' && j>=0){
+               sb.deleteCharAt(j);
+                j--;
+            } else if(s.charAt(i) != '#'){
+                sb.append(s.charAt(i));
+                j++;
             }
         }
-        if(st.equals(st1))
-        {
+        System.out.println(sb.toString());
+        int k = -1;
+        for(int i=0;i<n1;i++){
+        
+            if(t.charAt(i) == '#'  && k>=0){
+               sb1.deleteCharAt(k);
+                k--;
+            } else if(t.charAt(i) != '#'){
+                sb1.append(t.charAt(i));
+                k++;
+            }
+        }
+         System.out.println(sb1.toString());
+        
+        
+        if(sb.toString().equals(sb1.toString())){
             return true;
         }
         return false;
-        
     }
     
 }
